@@ -1,5 +1,5 @@
 {
-  "name": "TESTv2",
+  "name": "TESTv2_20260105",
   "description": "一個精緻的 React 應用程式，透過多階段測驗分析用戶的投資性格，並利用 Gemini AI 提供個人化的基金投資建議。",
   "requestFramePermissions": []
 }
