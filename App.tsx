@@ -186,9 +186,9 @@ const ProgressBar = ({ current, total }: { current: number, total: number }) => 
 );
 
 const PerformanceMetric = ({ label, val }: { label: string, val: string | undefined }) => (
-  <div className="flex flex-col items-start gap-1 p-5 bg-[#F8FAFC] rounded-2xl border border-slate-100 flex-1 min-w-[120px]">
-    <span className="text-slate-400 text-xs font-bold leading-none mb-1">{label}</span>
-    <span className="font-extrabold text-lg text-[#B91C1C]">{val || '--'}</span>
+  <div className="flex flex-col items-start gap-1 p-2 sm:p-5 bg-[#F8FAFC] rounded-2xl border border-slate-100 flex-1 min-w-0">
+    <span className="text-slate-400 text-[9px] sm:text-xs font-bold leading-none mb-1 whitespace-nowrap">{label}</span>
+    <span className="font-extrabold text-[12px] sm:text-lg text-[#B91C1C] truncate">{val || '--'}</span>
   </div>
 );
 
@@ -212,7 +212,7 @@ const FundCard: React.FC<{ fund: Fund; isSelected: boolean; onToggle: (code: str
           </div>
         </div>
         <div className="pt-8 border-t border-slate-100">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4">
             <PerformanceMetric label="一年績效" val={fund.perf} />
             <PerformanceMetric label="兩年績效" val={fund.perf2y} />
             <PerformanceMetric label="三年績效" val={fund.perf3y} />
@@ -507,7 +507,7 @@ const CartView = ({ persona, selected, onToggle, onReset }: { persona: Persona; 
   const satelliteFunds = [...MOCK_FUNDS.filter(f => recs.sat.includes(f.code)), ...MOCK_FUNDS.filter(f => f.code === recs.etf)];
 
   return (
-    <div className="max-w-5xl mx-auto py-12 px-6 animate-fadeIn space-y-20 pb-48">
+    <div className="max-w-5xl mx-auto py-12 px-6 animate-fadeIn space-y-20 pb-64 sm:pb-48">
       <div className="text-center space-y-12">
         <h2 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight">專屬投資口袋推薦</h2>
         <div className="flex flex-col items-center gap-10">
@@ -540,24 +540,24 @@ const CartView = ({ persona, selected, onToggle, onReset }: { persona: Persona; 
         </div>
       </div>
 
-      <div className="fixed bottom-6 left-0 right-0 z-50 px-4">
-        <div className="max-w-4xl mx-auto bg-slate-900/90 backdrop-blur-xl text-white py-6 px-8 rounded-[3rem] shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-8 border border-white/10">
-          <div className="flex items-center gap-8">
-            <div className="relative p-4 bg-red-900/30 rounded-2xl flex items-center justify-center">
-                <ShoppingCart size={28} className="text-red-500" />
-                <span className="absolute -top-1.5 -right-1.5 bg-red-600 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black">{selected.length}</span>
+      <div className="fixed bottom-4 sm:bottom-6 left-0 right-0 z-50 px-4">
+        <div className="max-w-4xl mx-auto bg-slate-900/95 backdrop-blur-xl text-white py-3 sm:py-6 px-5 sm:px-8 rounded-[2rem] sm:rounded-[3rem] shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-8 border border-white/10">
+          <div className="flex items-center gap-4 sm:gap-8 w-full sm:w-auto">
+            <div className="relative p-2.5 sm:p-4 bg-red-900/30 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                <ShoppingCart size={20} className="text-red-500 sm:w-7 sm:h-7" />
+                <span className="absolute -top-1 -right-1 bg-red-600 w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[9px] sm:text-[10px] font-black">{selected.length}</span>
             </div>
             <div className="flex flex-col">
-                <span className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1">已選中標的</span>
-                <span className="text-2xl font-black">{selected.length} 檔基金</span>
+                <span className="text-slate-400 text-[8px] sm:text-[10px] font-black uppercase tracking-widest mb-0.5">已選中標的</span>
+                <span className="text-lg sm:text-2xl font-black leading-none">{selected.length} 檔基金</span>
             </div>
           </div>
-          <div className="flex gap-4 w-full sm:w-auto">
-            <button onClick={onReset} className="px-8 py-4 rounded-2xl font-black bg-white/5 hover:bg-white/10 text-slate-300 text-sm flex-1 sm:flex-none flex items-center justify-center gap-2">
-                <RefreshCcw size={16} /> 重新分析
+          <div className="flex gap-2 sm:gap-4 w-full">
+            <button onClick={onReset} className="px-4 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-black bg-white/5 hover:bg-white/10 text-slate-300 text-[11px] sm:text-sm flex-1 flex items-center justify-center gap-2 transition-colors">
+                <RefreshCcw size={14} className="sm:w-4 sm:h-4" /> 重新分析
             </button>
-            <button onClick={() => window.open('https://my.cmoneyfund.com.tw/', '_blank')} className="px-12 py-4 rounded-2xl font-black bg-red-900 text-white hover:bg-red-800 text-sm flex-2 sm:flex-none flex items-center justify-center gap-2">
-                立即申購 <ArrowRight size={18} />
+            <button onClick={() => window.open('https://my.cmoneyfund.com.tw/', '_blank')} className="px-6 sm:px-12 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-black bg-red-900 text-white hover:bg-red-800 text-[11px] sm:text-sm flex-[1.5] flex items-center justify-center gap-2 shadow-lg shadow-red-900/20 transition-all">
+                立即申購 <ArrowRight size={14} className="sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
