@@ -1,4 +1,3 @@
-
 import { Fund, Question } from './types';
 
 export const MOCK_FUNDS: Fund[] = [
@@ -401,7 +400,7 @@ export const MOCK_FUNDS: Fund[] = [
 
 export const QUESTIONS: Record<string, Question[]> = {
   type2: [
-    { id: 1, text: "一想到火鍋，我就想到減邊。", type: 'range' },
+    { id: 1, text: "一想到火鍋，我就想到減肥。", type: 'range' },
     { id: 2, text: "一想到品質，我就想到太貴。", type: 'range' },
     { id: 3, text: "一想到高配息，我就想到我需要。", type: 'range' },
     { id: 4, text: "一想到暴跌，我就想到加碼。", type: 'range' },
@@ -410,21 +409,21 @@ export const QUESTIONS: Record<string, Question[]> = {
     { id: 7, text: "一想到契約，我就感到被限制。", type: 'range' },
     { id: 8, text: "一想到吃Buffet，我就覺得好空虛。", type: 'range' },
     { id: 9, text: "一想到小孩教育，我就想到送出國。", type: 'range' },
-    { id: 10, text: "一想到買手機，我就想到指定 brand。", type: 'range' },
+    { id: 10, text: "一想到買手機，我就想到指定品牌。", type: 'range' },
   ],
   type3: [
     { id: 11, text: "我常在事後才發現，自己當下其實是情緒化決定。", type: 'range' },
     { id: 12, text: "如果沒有人提醒，我很容易忘記長期計畫。", type: 'range' },
     { id: 13, text: "比起錯過機會，我更怕做錯決定。", type: 'range' },
     { id: 14, text: "看到別人投資賺錢，我會重新檢討自己的配置。", type: 'range' },
-    { id: 15, text: "看到排隊名店，我也會想去排隊嚐鮮。", type: 'range' },
-    { id: 16, text: "去熟悉的餐廳，我每次都點一樣的餐點。", type: 'range' },
-    { id: 17, text: "買新手機時，我一定會加購意外險。", type: 'range' },
-    { id: 18, text: "參加抽獎活動，我寧願選『100% 獲得小獎』。", type: 'range' },
-    { id: 19, text: "比起賺獎金，我更喜歡底薪高一點。", type: 'range' },
+    { id: 15, text: "看到排隊名店，我也會想去排隊嚐鮮", type: 'range' },
+    { id: 16, text: "去熟悉的餐廳，我每次都點一樣的餐點", type: 'range' },
+    { id: 17, text: "買新手機時，我一定會加購意外險", type: 'range' },
+    { id: 18, text: "參加抽獎活動...我寧願選『100% 獲得小獎』", type: 'range' },
+    { id: 19, text: "比起賺獎金，我更喜歡底薪高一點", type: 'range' },
   ],
   type4: [
-    { id: 20, q: "宇宙農業部開放三個星系...你想去哪裡？", type: 'choice', options: [
+    { id: 20, q: "宇宙農業部開放三個星系，你想去哪裡？", type: 'choice', options: [
       { val: 1, text: "銀河聯盟 (保守)" },
       { val: 4, text: "家鄉基地 (平衡)" },
       { val: 7, text: "蠻荒新星 (積極)" }
@@ -436,12 +435,12 @@ export const QUESTIONS: Record<string, Question[]> = {
     ]},
     { id: 22, q: "持有「銀河通用幣」讓我更有安全感。", type: 'bool' },
     { id: 23, q: "豐收的金幣是用來買火箭登陸土星。", type: 'bool' },
-    { id: 24, q: "比起搖錢樹長大，我更要每月掉金幣直接花。", type: 'bool' },
-    { id: 25, q: "看到隔壁大豐收我不跟風。", type: 'bool' },
+    { id: 24, q: "我喜歡多摘果實落袋，不怕搖錢樹傷了根基。", type: 'bool' },
+    { id: 25, q: "看到隔壁大豐收，我不跟風。", type: 'bool' },
     { id: 26, q: "與其求穩，我更想賭一把未來的。", type: 'bool' },
-    { id: 27, q: "交給機器人自動灌溉。", type: 'bool' },
+    { id: 27, q: "我放心交給機器人自動灌溉。", type: 'bool' },
     { id: 28, q: "我不急著收成，寧願養分全回流。", type: 'bool' },
-    { id: 29, q: "追求金幣自由，是為了徹底退休。", type: 'bool' },
+    { id: 29, q: "我想在最短時間內，追求金幣自由。", type: 'bool' },
     { id: 30, q: "這棵樹是留給下一代的傳家寶。", type: 'bool' },
   ]
 };
