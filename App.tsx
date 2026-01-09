@@ -118,7 +118,7 @@ const QUESTIONS_DATA: Record<string, Question[]> = {
     { id: 7, text: "一想到契約，我就感到被限制。", type: 'range' },
     { id: 8, text: "一想到吃Buffet，我就覺得好空虛。", type: 'range' },
     { id: 9, text: "一想到小孩教育，我就想到送出國。", type: 'range' },
-    { id: 10, text: "一想到買手機，我就想到指定 brand。", type: 'range' },
+    { id: 10, text: "一想到買手機，我就想到指定品牌。", type: 'range' },
   ],
   type3: [
     { id: 11, text: "我常在事後才發現，自己當下其實是情緒化決定。", type: 'range' },
@@ -558,7 +558,6 @@ const CartView = ({ persona, selected, onToggle, onReset }: { persona: Persona; 
                 <span className="absolute -top-1 -right-1 bg-red-600 w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[9px] sm:text-[10px] font-black">{selected.length}</span>
             </div>
             <div className="flex flex-col">
-                <span className="text-slate-400 text-[8px] sm:text-[10px] font-black uppercase tracking-widest mb-0.5">已選中標的</span>
                 <span className="text-lg sm:text-2xl font-black leading-none">{selected.length} 檔基金</span>
             </div>
           </div>
@@ -615,7 +614,10 @@ const App = () => {
         {step === 'form' && <InfoForm data={formData} onChange={setFormData} onNext={() => setStep('quiz')} />}
         {step === 'quiz' && <Quiz onComplete={handleQuizComplete} />}
         {step === 'results' && <Results persona={persona} onContinue={() => setStep('cart')} />}
-        {step === 'cart' && <CartView persona={persona} selected={selected} onToggle={c => setSelected(p => p.includes(c) ? p.filter(x => x !== c) : [...p, c])} onReset={() => setStep('intro')} />}
+        {step === 'cart' && <CartView persona={persona} selected={selected} onToggle={c => setSelected(p => p.includes(c) ? p.filter(x => x !== c) : [...p, c])} onReset={() => {
+          setSelected([]);
+          setStep('quiz');
+        }} />}
       </main>
 
       <footer className="py-12 px-6 text-center border-t border-slate-100 bg-white">
