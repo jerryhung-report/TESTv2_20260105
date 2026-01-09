@@ -2,80 +2,80 @@
 import { Fund, Question } from './types';
 
 export const MOCK_FUNDS: Fund[] = [
-  // 核心配置 (Core) - 精選長青主動型基金
+  // 核心配置 (Core) - 精選穩定成長型標的
   { 
-    code: '安聯台灣大壩', 
-    name: '安聯台灣大壩基金-A', 
+    code: 'C0109015', 
+    name: 'PGIM Jennison美國成長基金A級別美元累積型', 
     isin: 'TW000T1212A5', 
-    currency: 'TWD', 
+    currency: 'USD', 
     risk: 4, 
     type: 'Core', 
-    desc: '透過由下而上的選股策略，佈局具備長期競爭力之台灣權值與成長股，是台灣最具代表性的主動型基金之一。', 
-    perf: '+22.4%', 
-    perf2y: '+45.8%', 
-    perf3y: '+72.1%' 
-  },
-  { 
-    code: '野村優質', 
-    name: '野村優質基金-累積', 
-    isin: 'TW000T0606A1', 
-    currency: 'TWD', 
-    risk: 4, 
-    type: 'Core', 
-    desc: '專注於尋找盈餘成長趨勢向上且評價合理之公司，佈局具成長性之龍頭企業，追求長期穩健增值。', 
-    perf: '+18.2%', 
-    perf2y: '+38.4%', 
-    perf3y: '+62.5%' 
-  },
-  { 
-    code: '復華人生目標', 
-    name: '復華人生目標基金', 
-    isin: 'TW000T0707A0', 
-    currency: 'TWD', 
-    risk: 3, 
-    type: 'Core', 
-    desc: '採均衡配置策略，隨市場狀況調整股債比例，適合追求資產長期增值與風險管控並重的投資人。', 
-    perf: '+12.8%', 
-    perf2y: '+25.1%', 
-    perf3y: '+38.8%' 
-  },
-  
-  // 衛星配置 (Satellite) - 精選具備爆發力或主題性之標的
-  { 
-    code: '統一全台贏家', 
-    name: '統一全台贏家基金', 
-    isin: 'TW000T0808A9', 
-    currency: 'TWD', 
-    risk: 4, 
-    type: 'Satellite', 
-    desc: '靈活調配具備轉機與成長動能之標的，專注於挖掘具備產業領導地位之潛力股，追求超額回報。', 
+    desc: '專注於具備強大獲利成長動能之美國大型企業，透過深入研究發掘具產業領導地位之標的，追求長期資本增值。', 
     perf: '+28.4%', 
     perf2y: '+52.1%', 
-    perf3y: '+88.5%' 
+    perf3y: '+78.5%' 
   },
   { 
-    code: '摩根台灣金磚', 
-    name: '摩根台灣金磚基金', 
+    code: 'C0115008', 
+    name: '法盛盧米斯賽勒斯美國成長股票基金-R/A美元級別', 
+    isin: 'TW000T0606A1', 
+    currency: 'USD', 
+    risk: 4, 
+    type: 'Core', 
+    desc: '聚焦於具備可持續競爭優勢之美國成長股，採集中持股策略，旨在捕捉企業長期價值成長之紅利。', 
+    perf: '+22.2%', 
+    perf2y: '+44.4%', 
+    perf3y: '+65.5%' 
+  },
+  { 
+    code: 'C0109004', 
+    name: 'PGIM美國公司債基金T級別美元累積型', 
+    isin: 'TW000T0707A0', 
+    currency: 'USD', 
+    risk: 3, 
+    type: 'Core', 
+    desc: '投資於美國投資等級公司債券，旨在市場波動中提供穩定的現金流與資本保全，是核心配置中的穩壓器。', 
+    perf: '+8.8%', 
+    perf2y: '+15.1%', 
+    perf3y: '+22.8%' 
+  },
+  
+  // 衛星配置 (Satellite) - 精選主題性與趨勢性標的
+  { 
+    code: 'C0115024', 
+    name: '法盛AI及機器人基金-R/A美元級別', 
+    isin: 'TW000T0808A9', 
+    currency: 'USD', 
+    risk: 4, 
+    type: 'Satellite', 
+    desc: '鎖定全球人工智慧與機器人產業鏈，涵蓋硬體製造與軟體服務，精準捕捉未來科技革命之投資機會。', 
+    perf: '+34.4%', 
+    perf2y: '+62.1%', 
+    perf3y: '+98.5%' 
+  },
+  { 
+    code: 'C0115019', 
+    name: '法盛訂閱經濟基金-R/A美元級別', 
     isin: 'TW000T0909A8', 
-    currency: 'TWD', 
+    currency: 'USD', 
     risk: 4, 
     type: 'Satellite', 
-    desc: '聚焦於具備「金磚」特質的台灣企業，特別是具備全球競爭優勢、高市佔率與創新能力之標的。', 
+    desc: '聚焦於商業模式轉型為訂閱制之企業，透過穩定的經常性收入來源，降低業績波動並追求穩定成長回報。', 
     perf: '+20.5%', 
-    perf2y: '+35.4%', 
-    perf3y: '+52.1%' 
+    perf2y: '+38.4%', 
+    perf3y: '+55.1%' 
   },
   { 
-    code: '國泰小龍', 
-    name: '國泰小龍基金', 
+    code: 'C0115011', 
+    name: '法盛智慧安保基金-R/A美元級別', 
     isin: 'TW000T1010A7', 
-    currency: 'TWD', 
+    currency: 'USD', 
     risk: 4, 
     type: 'Satellite', 
-    desc: '鎖定具備高成長潛力之中小型企業，透過深度的產業研究，捕捉企業成長爆發期的投資機會。', 
-    perf: '+24.1%', 
-    perf2y: '+42.8%', 
-    perf3y: '+65.2%' 
+    desc: '投資於實體與數位安全相關領域，包含網路安全、電子支付與關鍵基礎建設防護，掌握數位化趨勢下的鋼性需求。', 
+    perf: '+18.1%', 
+    perf2y: '+32.8%', 
+    perf3y: '+48.2%' 
   },
   { 
     code: '00891', 
@@ -102,7 +102,7 @@ export const QUESTIONS: Record<string, Question[]> = {
     { id: 7, text: "一想到契約，我就感到被限制。", type: 'range' },
     { id: 8, text: "一想到吃Buffet，我就覺得好空虛。", type: 'range' },
     { id: 9, text: "一想到小孩教育，我就想到送出國。", type: 'range' },
-    { id: 10, text: "一想到買手機，我就想到指定品牌。", type: 'range' },
+    { id: 10, text: "一想到買手機，我就想到指定 brand。", type: 'range' },
   ],
   type3: [
     { id: 11, text: "我常在事後才發現，自己當下其實是情緒化決定。", type: 'range' },
@@ -112,25 +112,25 @@ export const QUESTIONS: Record<string, Question[]> = {
     { id: 15, text: "看到排隊名店，我也會想去排隊嚐鮮。", type: 'range' },
     { id: 16, text: "去熟悉的餐廳，我每次都點一樣的餐點。", type: 'range' },
     { id: 17, text: "買新手機時，我一定會加購意外險。", type: 'range' },
-    { id: 18, text: "參加抽獎活動...我寧願選『100% 獲得小獎』。", type: 'range' },
+    { id: 18, text: "參加抽獎活動，我寧願選『100% 獲得小獎』。", type: 'range' },
     { id: 19, text: "比起賺獎金，我更喜歡底薪高一點。", type: 'range' },
   ],
   type4: [
     { id: 20, q: "比起搖錢樹長大，我更要每月掉金幣直接花。", type: 'bool' },
-    { id: 21, q: "我不急著收成，寧願養分全回流...", type: 'bool' },
-    { id: 22, q: "持有「銀河通用幣」讓我更有安全感。", type: 'bool' },
-    { id: 23, q: "看到隔壁大豐收我不跟風。", type: 'bool' },
-    { id: 24, q: "與其求穩，我更想賭一把未來的...", type: 'bool' },
-    { id: 25, q: "交給機器人自動灌溉。", type: 'bool' },
-    { id: 26, q: "這棵樹是留給下一代的傳家寶。", type: 'bool' },
-    { id: 27, q: "追求金幣自由，是為了徹底退休...", type: 'bool' },
-    { id: 28, q: "豐收的金幣是用來買火箭登陸土星...", type: 'bool' },
-    { id: 29, q: "來到宇宙樹苗交易所...你會選哪棵?", type: 'choice', options: [
-      { val: 1, text: "安心麵包樹 (保守)" },
+    { id: 21, q: "我不急著收成，寧願養分全回流。", type: 'bool' },
+    { id: 22, q: "持有「銀河通用幣」讓我更有安全感", type: 'bool' },
+    { id: 23, q: "看到隔壁大豐收我不跟風", type: 'bool' },
+    { id: 24, q: "與其求穩，我更想賭一把未來的。", type: 'bool' },
+    { id: 25, q: "交給機器人自動灌溉", type: 'bool' },
+    { id: 26, q: "這棵樹是留給下一代的傳家寶", type: 'bool' },
+    { id: 27, q: "追求金幣自由，是為了徹底退休。", type: 'bool' },
+    { id: 28, q: "豐收的金幣是用來買火箭登陸土星", type: 'bool' },
+    { id: 29, q: "來到宇宙樹苗交易所，你會選哪棵？", type: 'choice', options: [
+      { val: 1, text: "安心麵告樹 (保守)" },
       { val: 4, text: "全能混種樹 (平衡)" },
       { val: 7, text: "傑克魔豆樹 (積極)" }
     ]},
-    { id: 30, q: "宇宙農業部開放三個星系...你想去哪裡？", type: 'choice', options: [
+    { id: 30, q: "宇宙農業部開放三個星系，你想去哪裡？", type: 'choice', options: [
       { val: 1, text: "銀河聯盟 (保守)" },
       { val: 4, text: "家鄉基地 (平衡)" },
       { val: 7, text: "蠻荒新星 (積極)" }
