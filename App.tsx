@@ -408,7 +408,17 @@ const Quiz = ({ onComplete }: { onComplete: (ans: Record<number, number>) => voi
             <div className="space-y-8">
               <div className="flex justify-between gap-1 sm:gap-3">
                 {[1, 2, 3, 4, 5, 6, 7].map(v => (
-                  <button key={v} onClick={() => handleSelect(v)} className={`flex-1 aspect-square sm:h-14 sm:w-14 rounded-2xl font-black text-sm sm:text-lg transition-all ${ans[currQ.id] === v ? 'bg-red-900 text-white shadow-xl' : 'bg-slate-50 text-slate-400 hover:bg-slate-100'}`}>{v}</button>
+                  <button 
+                    key={v} 
+                    onClick={() => handleSelect(v)} 
+                    className={`flex-1 aspect-square sm:h-14 sm:w-14 rounded-2xl font-black text-sm sm:text-lg transition-all ${
+                      ans[currQ.id] === v 
+                        ? 'bg-red-900 text-white shadow-xl' 
+                        : 'bg-slate-50 text-slate-400 hover:bg-red-900 hover:text-white'
+                    }`}
+                  >
+                    {v}
+                  </button>
                 ))}
               </div>
               <div className="flex justify-between text-[11px] font-black text-slate-400 px-1 uppercase tracking-widest">
