@@ -49,8 +49,8 @@ export type Step = 'intro' | 'form' | 'quiz' | 'results' | 'cart';
 // --- 2. 常數數據 (Constants) ---
 
 const MAX_SCORE = 210;
-const POCKET_DOG_LOCAL = './口袋狗.png';
-const POCKET_DOG_FALLBACK = 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/pocket-dog.png';
+// 預設與備用圖片
+const DEFAULT_DOG_IMG = 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/pocket-dog.png';
 
 const PERSONAS: Persona[] = [
   { title: '口袋濟斯', desc: '馬爾濟斯型投資人資金規模不一定大，但對世界充滿好奇。他們偏好低門檻、可探索不同市場的基金配置，在控制風險的前提下，體驗投資帶來的視野擴張。', riskLevel: 1, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-maltese.png' },
@@ -59,7 +59,7 @@ const PERSONAS: Persona[] = [
   { title: '口袋柴', desc: '柴犬型投資人個性獨立、自我，不輕易追逐市場風向，常以專注於長期邏輯的視角看待波動。這種傲嬌而固執的氣質，使他們偏好能經得起時間考驗的基金，而非短線熱門題材。', riskLevel: 3, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-shiba.png' },
   { title: '口袋貴賓', desc: '貴賓犬型投資人重視差異化與質感，不想與市場雷同。具有特色主題、選股邏輯清楚的基金，能滿足他們對獨特性的期待。', riskLevel: 3, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-poodle.png' },
   { title: '口袋拉拉', desc: '拉拉型投資人高度重視「有沒有產出」，對現金流與紀律特別敏感。能定期看到成果的配息型基金或穩定投入機制，最能讓他們安心守住投資節奏。', riskLevel: 4, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-labrador.png' },
-  { title: '口袋土狗', desc: '台灣土狗型投資人擁有極強的環境適應力，不追求華麗報酬，而是能在各種市場條件下活得下來。分散、耐震、長期有效的基金配置，最符合他們的生存智慧。', riskLevel: 4, image: POCKET_DOG_LOCAL },
+  { title: '口袋土狗', desc: '台灣土狗型投資人擁有極強的環境適應力，不追求華麗報酬，而是能在各種市場條件下活得下來。分散、耐震、長期有效的基金配置，最符合他們的生存智慧。', riskLevel: 4, image: './口袋狗.png' },
   { title: '口袋邊牧', desc: '牧羊犬型投資人理性且高度系統化，相信規則勝過情緒。具備明確策略、可自動執行的基金投資方式，正好符合他們追求最佳化的思維。', riskLevel: 5, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-shepherd.png' },
   { title: '口袋阿金', desc: '阿金型投資人性格溫暖、陽光，理財目的不是擊敗市場，而是讓生活更安心。他們親近長期投資、穩健累積的策略，就像釀酒一樣，時間越久，收穫越醇。', riskLevel: 5, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-golden.png' },
   { title: '口袋獒', desc: '藏獒型投資人重視責任與守護，對風險高度警覺。核心配置、穩定性高的基金，是他們為資產築起防線的首選，寧可慢，也不能失守。', riskLevel: 6, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-mastiff.png' }
@@ -487,9 +487,9 @@ const Results = ({ persona, onContinue }: { persona: Persona; onContinue: () => 
           </div>
           <div className="w-full max-w-[350px] aspect-square flex items-center justify-center relative bg-slate-800/50 rounded-[3rem] border border-white/5 shadow-inner">
              <img 
-              src="./口袋狗.png" 
-              alt="口袋狗" 
-              onError={(e) => { e.currentTarget.src = POCKET_DOG_FALLBACK; }}
+              src={persona.image} 
+              alt={persona.title} 
+              onError={(e) => { e.currentTarget.src = DEFAULT_DOG_IMG; }}
               className="w-[85%] h-[85%] object-contain animate-float" 
             />
           </div>
