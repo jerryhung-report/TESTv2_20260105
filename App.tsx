@@ -183,7 +183,7 @@ const Intro = ({ onStart }: { onStart: () => void }) => (
           你的基金人格了嗎？
         </h1>
         <p className="text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed text-[20px]">
-          30 題挑戰，完成後即可立刻獲得您的<br className="hidden sm:block" />
+          30題測驗，完成後即可立刻獲得您的<br className="hidden sm:block" />
           <span className="text-red-900/60 font-bold">投資風格定位分析報告</span> 與 <span className="text-slate-900 font-bold">基金推薦</span>！
         </p>
       </div>
@@ -406,7 +406,7 @@ const CartView = ({ persona, selected, onToggle, onReset }: { persona: Persona, 
       <div className="text-center space-y-6">
         <h2 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight">您的專屬投資口袋</h2>
         <p className="text-slate-500 font-medium sm:text-xl">針對 <span className="text-red-900 font-black">{persona.title}</span> 風格，我們精選以下標的。</p>
-        <p className="text-xs text-slate-400 font-bold uppercase tracking-[0.2em]">數據截止日：2024/12/31</p>
+        <p className="text-xs text-slate-400 font-bold uppercase tracking-[0.2em]">績效截止日：2024/12/31</p>
       </div>
       <div className="space-y-20 pb-40"> 
         <div className="space-y-8">
