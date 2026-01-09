@@ -26,7 +26,6 @@ export interface Question {
 export interface UserFormData {
   gender: string;
   age: string;
-  allocation: string;
   phone: string;
   email: string;
 }
@@ -44,4 +43,5 @@ export interface Persona {
   title: string;
   desc: string;
   riskLevel: number;
+  image: string; // 每個人格專屬的合成圖路徑
 }

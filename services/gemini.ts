@@ -21,7 +21,7 @@ export const generatePersonalizedAdvice = async (
       model: "gemini-3-flash-preview",
       contents: `
         請以專業理財顧問的身份，為以下用戶提供一份簡短的投資心理與策略分析。
-        投資現況 (配比): ${user.allocation}
+        用戶年齡層: ${user.age}
         測驗得分: ${score}
         投資人格類型: ${persona.title}
         性格描述: ${persona.desc}
