@@ -414,7 +414,7 @@ export const QUESTIONS: Record<string, Question[]> = {
   type3: [
     { id: 11, text: "我常在事後才發現，自己當下其實是情緒化決定。", type: 'range' },
     { id: 12, text: "如果沒有人提醒，我很容易忘記長期計畫。", type: 'range' },
-    { id: 13, text: "比起錯過機會，我更怕做錯決定。", type: 'range' },
+    { id: 13, text: "我寧可少賺一點，也不想賠錢做錯決定。", type: 'range' },
     { id: 14, text: "看到別人投資賺錢，我會重新檢討自己的配置。", type: 'range' },
     { id: 15, text: "看到排隊名店，我也會想去排隊嚐鮮", type: 'range' },
     { id: 16, text: "去熟悉的餐廳，我每次都點一樣的餐點", type: 'range' },
@@ -434,12 +434,12 @@ export const QUESTIONS: Record<string, Question[]> = {
       { val: 7, text: "傑克魔豆樹 (積極)" }
     ]},
     { id: 22, q: "持有「銀河通用幣」讓我更有安全感。", type: 'bool' },
-    { id: 23, q: "豐收的金幣是用來買火箭登陸土星。", type: 'bool' },
+    { id: 23, q: "豐收的金幣是用來買火箭，而非存在銀行。", type: 'bool' },
     { id: 24, q: "我喜歡多摘果實落袋，不怕搖錢樹傷了根基。", type: 'bool' },
     { id: 25, q: "看到隔壁大豐收，我不跟風。", type: 'bool' },
     { id: 26, q: "與其求穩，我更想賭一把未來的。", type: 'bool' },
     { id: 27, q: "我放心交給機器人自動灌溉。", type: 'bool' },
-    { id: 28, q: "我不急著收成，寧願養分全回流。", type: 'bool' },
+    { id: 28, q: "我不急著收成，裝潢全回流。", type: 'bool' },
     { id: 29, q: "我想在最短時間內，追求金幣自由。", type: 'bool' },
     { id: 30, q: "這棵樹是留給下一代的傳家寶。", type: 'bool' },
   ]
