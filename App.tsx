@@ -2,8 +2,10 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { 
   ShoppingCart, Leaf, BrainCircuit, Check, TrendingUp, Sparkles, Phone, Mail,
   Plus, CheckCircle, ShieldCheck, ArrowRight, ArrowLeft, RefreshCcw, ExternalLink,
-  Globe, Satellite, Rocket, Coins, TreePine, Star, Sparkle, LayoutGrid, Info
+  Globe, Satellite, Rocket, Coins, TreePine, Star, Sparkle, LayoutGrid, Info,
+  Loader2
 } from 'lucide-react';
+import { GoogleGenAI } from "@google/genai";
 
 // --- 1. 類型定義 (Types) ---
 
@@ -49,20 +51,19 @@ export type Step = 'intro' | 'form' | 'quiz' | 'results' | 'cart';
 // --- 2. 常數數據 (Constants) ---
 
 const MAX_SCORE = 210;
-// 預設與備用圖片
-const DEFAULT_DOG_IMG = 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/pocket-dog.png';
+const DEFAULT_DOG_IMG = './pocket-dog.png';
 
 const PERSONAS: Persona[] = [
-  { title: '口袋濟斯', desc: '馬爾濟斯型投資人資金規模不一定大，但對世界充滿好奇。他們偏好低門檻、可探索不同市場的基金配置，在控制風險的前提下，體驗投資帶來的視野擴張。', riskLevel: 1, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-maltese.png' },
-  { title: '口袋西施', desc: '西施犬型投資人講究生活品質與節奏，不急著進出市場。穩健、管理風格一致的基金，讓資產在不被打擾的狀態下，優雅累積。', riskLevel: 2, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-shih-tzu.png' },
-  { title: '口袋吉娃', desc: '吉娃娃型投資人情緒敏感、反應快速，容易受市場波動影響。透過分散配置與小額定期投入的基金策略，有助於在高壓情緒中維持投資穩定度.', riskLevel: 2, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-chihuahua.png' },
-  { title: '口袋柴', desc: '柴犬型投資人個性獨立、自我，不輕易追逐市場風向，常以專注於長期邏輯的視角看待波動。這種傲嬌而固執的氣質，使他們偏好能經得起時間考驗的基金，而非短線熱門題材。', riskLevel: 3, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-shiba.png' },
-  { title: '口袋貴賓', desc: '貴賓犬型投資人重視差異化與質感，不想與市場雷同。具有特色主題、選股邏輯清楚的基金，能滿足他們對獨特性的期待。', riskLevel: 3, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-poodle.png' },
-  { title: '口袋拉拉', desc: '拉拉型投資人高度重視「有沒有產出」，對現金流與紀律特別敏感。能定期看到成果的配息型基金或穩定投入機制，最能讓他們安心守住投資節奏。', riskLevel: 4, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-labrador.png' },
-  { title: '口袋土狗', desc: '台灣土狗型投資人擁有極強的環境適應力，不追求華麗報酬，而是能在各種市場條件下活得下來。分散、耐震、長期有效的基金配置，最符合他們的生存智慧。', riskLevel: 4, image: './口袋狗.png' },
-  { title: '口袋邊牧', desc: '牧羊犬型投資人理性且高度系統化，相信規則勝過情緒。具備明確策略、可自動執行的基金投資方式，正好符合他們追求最佳化的思維。', riskLevel: 5, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-shepherd.png' },
-  { title: '口袋阿金', desc: '阿金型投資人性格溫暖、陽光，理財目的不是擊敗市場，而是讓生活更安心。他們親近長期投資、穩健累積的策略，就像釀酒一樣，時間越久，收穫越醇。', riskLevel: 5, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-golden.png' },
-  { title: '口袋獒', desc: '藏獒型投資人重視責任與守護，對風險高度警覺。核心配置、穩定性高的基金，是他們為資產築起防線的首選，寧可慢，也不能失守。', riskLevel: 6, image: 'https://raw.githubusercontent.com/tina-dev-pocket/assets/main/persona-mastiff.png' }
+  { title: '口袋濟斯', desc: '馬爾濟斯型投資人資金規模不一定大，但對世界充滿好奇。他們偏好低門檻、可探索不同市場的基金配置，在控制風險的前提下，體驗投資帶來的視野擴張。', riskLevel: 1, image: DEFAULT_DOG_IMG },
+  { title: '口袋西施', desc: '西施犬型投資人講究生活品質與節奏，不急著進出市場。穩健、管理風格一致的基金，讓資產在不被打擾的狀態下，優雅累積。', riskLevel: 2, image: DEFAULT_DOG_IMG },
+  { title: '口袋吉娃', desc: '吉娃娃型投資人情緒敏感、反應快速，容易受市場波動影響。透過分散配置與小額定期投入的基金策略，有助於在高壓情緒中維持投資穩定度.', riskLevel: 2, image: DEFAULT_DOG_IMG },
+  { title: '口袋柴', desc: '柴犬型投資人個性獨立、自我，不輕易追逐市場風向，常以專注於長期邏輯的視角看待波動。這種傲嬌而固執的氣質，使他們偏好能經得起時間考驗的基金，而非短線熱門題材。', riskLevel: 3, image: DEFAULT_DOG_IMG },
+  { title: '口袋貴賓', desc: '貴賓犬型投資人重視差異化與質感，不想與市場雷同。具有特色主題、選股邏輯清楚的基金，能滿足他們對獨特性的期待。', riskLevel: 3, image: DEFAULT_DOG_IMG },
+  { title: '口袋拉拉', desc: '拉拉型投資人高度重視「有沒有產出」，對現金流與紀律特別敏感。能定期看到成果的配息型基金或穩定投入機制，最能讓他們安心守住投資節奏。', riskLevel: 4, image: DEFAULT_DOG_IMG },
+  { title: '口袋土狗', desc: '台灣土狗型投資人擁有極強的環境適應力，不追求華麗報酬，而是能在各種市場條件下活得下來。分散、耐震、長期有效的基金配置，最符合他們的生存智慧。', riskLevel: 4, image: DEFAULT_DOG_IMG },
+  { title: '口袋邊牧', desc: '牧羊犬型投資人理性且高度系統化，相信規則勝過情緒。具備明確策略、可自動執行的基金投資方式，正好符合他們追求最佳化的思維。', riskLevel: 5, image: DEFAULT_DOG_IMG },
+  { title: '口袋阿金', desc: '阿金型投資人性格溫暖、陽光，理財目的不是擊敗市場，而是讓生活更安心。他們親近長期投資、穩健累積的策略，就像釀酒一樣，時間越久，收穫越醇。', riskLevel: 5, image: DEFAULT_DOG_IMG },
+  { title: '口袋獒', desc: '藏獒型投資人重視責任與守護，對風險高度警覺。核心配置、穩定性高的基金，是他們為資產築起防線的首選，寧可慢，也不能失守。', riskLevel: 6, image: DEFAULT_DOG_IMG }
 ];
 
 const MOCK_FUNDS: Fund[] = [
@@ -171,7 +172,6 @@ const RECOMMENDATION_MAP: Record<string, { core: string[], sat: string[], etf: s
 
 const BTN_BASE = "inline-flex items-center justify-center gap-2 font-bold transition-all duration-300 active:scale-[0.98] focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed rounded-2xl";
 const BTN_PRIMARY = `${BTN_BASE} bg-red-900 text-white hover:bg-red-800 shadow-lg shadow-red-900/10`;
-const BTN_DARK = `${BTN_BASE} bg-slate-900 text-white hover:bg-slate-800 shadow-xl shadow-slate-900/20`;
 
 const ProgressBar = ({ current, total }: { current: number, total: number }) => (
   <div className="flex flex-col items-center gap-3 w-full max-w-lg mx-auto mb-10">
@@ -223,7 +223,81 @@ const FundCard: React.FC<{ fund: Fund; isSelected: boolean; onToggle: (code: str
   );
 };
 
-// --- 5. 頁面視圖 (Page Views) ---
+// --- 5. 圖片生成組件 (AI Image Generator) ---
+
+const PersonaImage = ({ persona }: { persona: Persona }) => {
+  const [imgUrl, setImgUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const generateImage = async () => {
+      setLoading(true);
+      try {
+        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        
+        // 解析犬種名稱，用於提示詞
+        const dogBreed = persona.title.replace('口袋', '');
+        
+        // 提示詞設計：改編自原型 pocket-dog
+        // 核心要求：方型身體、白色縫線、對應犬種的表情與耳朵
+        // 去背要求：純白色背景
+        // 禁止文字：NO TEXT
+        const prompt = `A comic-style character mascot art based on the prototype "Pocket Dog".
+        CHARACTER DESIGN: 
+        1. Body must be a distinct rounded square/pocket shape (tan color top, red color bottom).
+        2. Visible thick white stitching edges along the bottom and side seams of the red "pocket" portion.
+        3. BREED ADAPTATION: Modify ONLY the facial expression, eyes, and ear shapes to resemble a ${dogBreed}. 
+        4. EXPRESSION: The dog should look ${persona.title.includes('獒') ? 'protective and vigilant' : 'smart and cheerful'} matching the "${persona.title}" personality.
+        VISUAL STYLE:
+        - High-contrast comic art, clean bold lines.
+        - NO TEXT, NO WORDS, NO LABELS, NO LETTERS.
+        - BACKGROUND: Pure, solid flat white background (#FFFFFF) only.
+        - ADAPTATION: Change the expression and ears of the original mascot to reflect the ${dogBreed} breed.`;
+        
+        const response = await ai.models.generateContent({
+          model: 'gemini-2.5-flash-image',
+          contents: { parts: [{ text: prompt }] },
+          config: {
+            imageConfig: { aspectRatio: "1:1" }
+          }
+        });
+
+        for (const part of response.candidates[0].content.parts) {
+          if (part.inlineData) {
+            setImgUrl(`data:image/png;base64,${part.inlineData.data}`);
+            break;
+          }
+        }
+      } catch (e) {
+        console.error("AI Image Generation failed:", e);
+        setImgUrl(DEFAULT_DOG_IMG);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    generateImage();
+  }, [persona.title]);
+
+  return (
+    <div className="w-full max-w-[350px] aspect-square flex items-center justify-center relative bg-white rounded-[3rem] border border-slate-100 shadow-inner overflow-hidden">
+      {loading ? (
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="w-12 h-12 text-red-500 animate-spin" />
+          <span className="text-xs font-black text-slate-400 uppercase tracking-widest">AI 畫像生成中...</span>
+        </div>
+      ) : (
+        <img 
+          src={imgUrl || DEFAULT_DOG_IMG} 
+          alt={persona.title} 
+          className="w-full h-full object-contain animate-float mix-blend-multiply" 
+        />
+      )}
+    </div>
+  );
+};
+
+// --- 6. 頁面視圖 (Page Views) ---
 
 const Intro = ({ onStart }: { onStart: () => void }) => (
   <div className="relative min-h-[80vh] flex flex-col items-center justify-center px-6 py-12 bg-white">
@@ -495,17 +569,11 @@ const Results = ({ persona, onContinue }: { persona: Persona; onContinue: () => 
             </div>
             <p className="text-lg sm:text-2xl text-slate-300 leading-relaxed font-medium">{persona.desc}</p>
           </div>
-          <div className="w-full max-w-[350px] aspect-square flex items-center justify-center relative bg-slate-800/50 rounded-[3rem] border border-white/5 shadow-inner">
-             <img 
-              src={persona.image} 
-              alt={persona.title} 
-              onError={(e) => { e.currentTarget.src = DEFAULT_DOG_IMG; }}
-              className="w-[85%] h-[85%] object-contain animate-float" 
-            />
-          </div>
+          {/* 使用 AI 圖片生成組件 */}
+          <PersonaImage persona={persona} />
         </div>
       </div>
-      <button onClick={onContinue} className={`${BTN_PRIMARY} w-full py-6 text-xl shadow-2xl`}>查看個人化推薦配置 <ArrowRight size={28} /></button>
+      <button onClick={onContinue} className={`${BTN_PRIMARY} w-full py-6 text-xl shadow-2xl`}>查看個人化推薦基金 <ArrowRight size={28} /></button>
       <style>{` @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } } .animate-float { animation: float 5s ease-in-out infinite; } `}</style>
     </div>
   );
@@ -575,20 +643,18 @@ const CartView = ({ persona, selected, onToggle, onReset }: { persona: Persona; 
   );
 };
 
-// --- 6. 主程式 (Main App) ---
+// --- 7. 主程式 (Main App) ---
 
 const App = () => {
   const [step, setStep] = useState<Step>('intro');
   const [formData, setFormData] = useState<UserFormData>({ gender: '', age: '', phone: '', email: '' });
   const [persona, setPersona] = useState<Persona>(PERSONAS[0]);
-  const [score, setScore] = useState(0);
   const [selected, setSelected] = useState<string[]>([]);
 
   const handleQuizComplete = async (answers: Record<number, number>) => {
     let s = 0; Object.values(answers).forEach(v => s += v);
     const personaIndex = Math.min(Math.floor((s / MAX_SCORE) * 10), 9);
     const p = PERSONAS[personaIndex];
-    setScore(s);
     setPersona(p);
     setSelected([]);
     setStep('results');
