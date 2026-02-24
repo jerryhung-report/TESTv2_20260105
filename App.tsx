@@ -149,7 +149,7 @@ const QUESTIONS_DATA: Record<string, Question[]> = {
     { id: 25, q: "看到隔壁大豐收，我不跟風。", type: 'bool' },
     { id: 26, q: "與其求穩，我更想賭一把未來的。", type: 'bool' },
     { id: 27, q: "我放心交給機器人自動灌溉。", type: 'bool' },
-    { id: 28, q: "我不急著收成，裝潢全回流。", type: 'bool' },
+    { id: 28, q: "我不急著收成，寧願養分全回流。", type: 'bool' },
     { id: 29, q: "我想在最短時間內，追求金幣自由。", type: 'bool' },
     { id: 30, q: "這棵樹是留給下一代的傳家寶。", type: 'bool' },
   ]
